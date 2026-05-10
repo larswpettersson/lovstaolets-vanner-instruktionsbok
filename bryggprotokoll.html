@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bryggprotokoll - Lövstaölets Vänner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 24px;
+            color: #333;
+            background: #f7f9fc;
+        }
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #e3e8ef;
+            border-radius: 10px;
+            padding: 22px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            border: 1px solid #aaaaaa;
+            text-align: left;
+            padding: 10px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        hr {
+            border: 1px solid #cccccc;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            background: #f4f8fd;
+            border: 1px solid #dbe6f3;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0 18px;
+        }
+        .field label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 6px;
+            color: #4b5563;
+        }
+        .field input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 10px;
+            border: 1px solid #c5d2e4;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+        .meta {
+            margin: 8px 0 18px;
+            color: #1f4a7a;
+            font-size: 14px;
+        }
+        .small-note {
+            font-size: 13px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+    <h1>Bryggprotokoll - Lövstaölets Vänner</h1>
+
+    <!-- TOM MALL -->
+    <h2>Tom Mall</h2>
+    
+    <h3>Extraktgivare (Malt & Råfrukt)</h3>
+    <table>
+        <tr>
+            <th>Mängd (kg)</th>
+            <th>Sort och märke</th>
+            <th>Extrakt (bidrag)</th>
+        </tr>
+        <tr><td>&nbsp;</td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td></tr>
+        <tr>
+            <td><strong>Totalt:</strong></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>Humle & Tillsatser</h3>
+    <table>
+        <tr>
+            <th>Mängd (g)</th>
+            <th>Sort</th>
+            <th>Alfa %</th>
+            <th>Tid (min)</th>
+            <th>BU (Beska)</th>
+        </tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td>60</td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td>30</td><td></td></tr>
+        <tr><td>-</td><td>Protafloc</td><td>-</td><td>20</td><td>-</td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td>15</td><td></td></tr>
+        <tr><td>&nbsp;</td><td></td><td></td><td>5</td><td></td></tr>
+    </table>
+    
+    <h3>Vattenbehandling (Salter, klarningsmedel)</h3>
+    <hr>
+    <p><em>(Fylls i vid behov)</em></p>
+
+    <br><br>
+
+    <!-- IFYLLT RECEPT -->
+    <h2>Dagens recept (Citra/APA)</h2>
+    <div class="controls">
+        <div class="field">
+            <label for="baseVolume">Grundvolym i receptet (liter)</label>
+            <input id="baseVolume" type="number" min="1" step="0.1" value="50">
+        </div>
+        <div class="field">
+            <label for="targetVolume">Ny bryggvolym (liter)</label>
+            <input id="targetVolume" type="number" min="1" step="0.1" value="50">
+        </div>
+    </div>
+    <p class="meta">
+        Skalfaktor: <strong id="scaleFactor">1,00</strong>x
+    </p>
+    
+    <h3>Extraktgivare (Malt & Råfrukt)</h3>
+    <table>
+        <tr>
+            <th>Mängd (kg)</th>
+            <th>Sort och märke</th>
+            <th>Extrakt (bidrag)</th>
+        </tr>
+        <tr><td class="malt-amount" data-base="9.0"></td><td>Pale Ale (P)</td><td></td></tr>
+        <tr><td class="malt-amount" data-base="0.3"></td><td>Münchener (Mu)</td><td></td></tr>
+        <tr><td class="malt-amount" data-base="0.5"></td><td>Ljus karamell (Ljk)</td><td></td></tr>
+        <tr><td class="malt-amount" data-base="0.5"></td><td>Mörk karamell (Mk)</td><td></td></tr>
+        <tr>
+            <td><strong id="maltTotal"></strong></td>
+            <td><strong>Totalt</strong></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <h3>Humle & Tillsatser</h3>
+    <table>
+        <tr>
+            <th>Mängd (g)</th>
+            <th>Sort</th>
+            <th>Alfa %</th>
+            <th>Tid (min)</th>
+            <th>BU (Beska)</th>
+        </tr>
+        <tr><td class="hop-amount" data-base="16"></td><td>Humle (Giva 1, Beska) - Citra</td><td></td><td>60</td><td></td></tr>
+        <tr><td class="hop-amount" data-base="10"></td><td>Humle (Giva 2) - Citra</td><td></td><td>30</td><td></td></tr>
+        <tr><td>-</td><td>Protafloc</td><td>-</td><td>20</td><td>-</td></tr>
+        <tr><td class="hop-amount" data-base="18"></td><td>Humle (Giva 3, Smak) - Citra</td><td></td><td>15</td><td></td></tr>
+        <tr><td class="hop-amount" data-base="18"></td><td>Humle (Giva 4, Doft) - Citra</td><td></td><td>5</td><td></td></tr>
+    </table>
+    <p class="small-note">Humlegivor skalar med samma faktor. Protafloc är satt som fast tillsats.</p>
+
+    <h3>Vattenbehandling (Salter, klarningsmedel)</h3>
+    <hr>
+    <p><em>Ingen vattenbehandling angiven på whiteboarden.</em></p>
+
+    </div>
+    <script>
+        const baseVolumeInput = document.getElementById("baseVolume");
+        const targetVolumeInput = document.getElementById("targetVolume");
+        const scaleFactorEl = document.getElementById("scaleFactor");
+        const maltAmountCells = Array.from(document.querySelectorAll(".malt-amount"));
+        const hopAmountCells = Array.from(document.querySelectorAll(".hop-amount"));
+        const maltTotalEl = document.getElementById("maltTotal");
+
+        function formatSv(value, decimals) {
+            return value.toLocaleString("sv-SE", {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        function recalculate() {
+            const baseVolume = parseFloat(baseVolumeInput.value);
+            const targetVolume = parseFloat(targetVolumeInput.value);
+
+            if (!Number.isFinite(baseVolume) || !Number.isFinite(targetVolume) || baseVolume <= 0 || targetVolume <= 0) {
+                scaleFactorEl.textContent = "Ogiltigt värde";
+                maltTotalEl.textContent = "-";
+                return;
+            }
+
+            const factor = targetVolume / baseVolume;
+            scaleFactorEl.textContent = formatSv(factor, 2);
+
+            let maltTotal = 0;
+            maltAmountCells.forEach((cell) => {
+                const base = parseFloat(cell.dataset.base);
+                const scaled = base * factor;
+                maltTotal += scaled;
+                cell.textContent = formatSv(scaled, 2);
+            });
+
+            hopAmountCells.forEach((cell) => {
+                const base = parseFloat(cell.dataset.base);
+                const scaled = base * factor;
+                cell.textContent = formatSv(scaled, 1);
+            });
+
+            maltTotalEl.textContent = formatSv(maltTotal, 2);
+        }
+
+        baseVolumeInput.addEventListener("input", recalculate);
+        targetVolumeInput.addEventListener("input", recalculate);
+        recalculate();
+    </script>
+</body>
+</html>
